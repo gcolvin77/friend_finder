@@ -5,8 +5,11 @@
   <title>Friend Finder Survey</title>
 
   <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="../assets/reset.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../assets/style.css">
+
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
@@ -18,46 +21,33 @@
     <div class="jumbotron">
       <h1 class="text-center"><span class="fa"></span>Take the survey to meet your match!</h1>
       <hr>
-      <h3 class="text-center">Each question has a scale of 1-5. A score of 1 means you strongly </h3>
-      <h3 class="text-center">disagree, while a 5 means you strongly agree. 3 is neutral. </h3>
+      <h3 class="text-center">Answer each question as honestly as you</h3>
+      <h3 class="text-center">can so we can find a good friend match!</h3>
       <br>
 
     </div>
 
-    <div class="row">
-      <div class="col-lg-12">
-
-          <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-              <label class="custom-control-label" for="customRadioInline1">Strongly Disagree</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-              <label class="custom-control-label" for="customRadioInline2">Disagree</label>
-            </div>
-            <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline3" name="customRadioInline1" class="custom-control-input">
-                <label class="custom-control-label" for="customRadioInline3">Neither</label>
-              </div>
-              <div class="custom-control custom-radio custom-control-inline">
-                  <input type="radio" id="customRadioInline4" name="customRadioInline1" class="custom-control-input">
-                  <label class="custom-control-label" for="customRadioInline4">Agree</label>
-                </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="customRadioInline5" name="customRadioInline1" class="custom-control-input">
-                    <label class="custom-control-label" for="customRadioInline5">Strongly Agree</label>
-                  </div>
-
-
-      </div>
-    </div>
-
     <div class="container">
         <div class="row">
+            <form>
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                  <label for="pic">Link to Picture</label>
+                  <input type="text" class="form-control" id="pic" placeholder="www.google.com">
+                </div>
+              </form>
+        </div>
+
+
+
+      <div class="row" >
           
-      <div class="custom-radios">
-        <div>
-          <input type="radio" id="color-1" name="color" value="color-1" checked>
+      <div class="custom-radios" id="questions">
+       <!--  <div>
+          <input type="radio" id="color-1" name="color" value= 1 >
           <label for="color-1">
             <span>
             </span>
@@ -65,7 +55,7 @@
         </div>
         
         <div>
-          <input type="radio" id="color-2" name="color" value="color-2">
+          <input type="radio" id="color-2" name="color" value= 2 >
           <label for="color-2">
             <span>
             </span>
@@ -73,7 +63,7 @@
         </div>
         
         <div>
-          <input type="radio" id="color-3" name="color" value="color-3">
+          <input type="radio" id="color-3" name="color" value= 3>
           <label for="color-3">
             <span>
             </span>
@@ -81,30 +71,80 @@
         </div>
       
         <div>
-          <input type="radio" id="color-4" name="color" value="color-4">
+          <input type="radio" id="color-4" name="color" value= 4>
           <label for="color-4">
             <span>
             </span>
           </label>
         </div>
+
+        <div>
+            <input type="radio" id="color-5" name="color" value= 5>
+            <label for="color-5">
+              <span>
+              </span>
+            </label>
+          </div>
+ -->
+
+
       </div>
         </div>
       </div>
 
+    </div>
+
 
     <footer class="footer">
       <div class="container">
-        <p><a href="/api/tables">API Table Link</a> | <a href="/api/waitlist">API Wait List</a> | <a href="https://github.com/afhaque/HotRestaurant">GitHub Repo</a></p>
+        <p><a href="/api/friends">Friends</a> </p>
       </div>
     </footer>
 
-  </div>
+  
 
 </body>
 </html>
 
 <!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
 <script type="text/javascript">
+
+var questionSet = [
+        "I like to stay home and have a relaxing evening more than go out",
+        "I'm very careful with money and only spend when I need to",
+        "I'd rather text than talk on the phone",
+        "Religion is important to me and I attend church often",
+        "Donald Trump is a great president",
+        "I like to play video games",
+        "I like to read",
+        "I love the outdoors and enjoy camping and hiking when I can",
+        "Animals are important to me, and pets are a must",
+        "Coding is more fun than frustrating"
+]
+
+
+
+for(var i = 0; i<questionSet.length; i++){
+
+var q = i+1;
+$("#questions").append('Q'+ q + ' -- ' +questionSet[i] + '<br>');
+
+
+for(var j =1; j<6; j++){
+  var button = '<div><input type="radio" id="color-' + j + '" name="color" value= ' + j +'><label for="color-' + j + '"><span></span></label></div>'
+  $("#questions").append(button);
+
+}
+
+$("#questions").append('<br><br>');
+
+}
+
+
+
+
+
+
 
     // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
     // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
@@ -115,38 +155,24 @@
       event.preventDefault();
 
       // Here we grab the form elements
-      var newReservation = {
-        customerName: $("#reserve-name").val().trim(),
-        phoneNumber: $("#reserve-phone").val().trim(),
-        customerEmail: $("#reserve-email").val().trim(),
-        customerID: $("#reserve-unique-id").val().trim()
+      var newFriend = {
+        name: $("#name").val().trim(),
+        picture: $("#pic").val().trim(),
+        scores: []
       };
 
-      console.log(newReservation);
+      console.log(newFriend);
 
       // This line is the magic. It"s very similar to the standard ajax function we used.
       // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
       // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
       // depending on if a tables is available or not.
 
-      $.post("/api/tables", newReservation,
+      $.post("/api/friends", newFriend,
         function(data) {
-
-          // If a table is available... tell user they are booked.
-          if (data) {
-            alert("Yay! You are officially booked!");
-          }
-
-          // If a table is available... tell user they on the waiting list.
-          else {
-            alert("Sorry you are on the wait list");
-          }
-
-          // Clear the form when submitting
-          $("#reserve-name").val("");
-          $("#reserve-phone").val("");
-          $("#reserve-email").val("");
-          $("#reserve-unique-id").val("");
+         
+          $("#name").val("");
+          $("#pic").val("");
 
         });
 

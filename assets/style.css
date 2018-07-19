@@ -45,8 +45,12 @@ html, body {
     background-color: #f1c40f;
   }
   .custom-radios input[type="radio"]#color-4 + label span {
+    background-color: orange;
+  }
+  .custom-radios input[type="radio"]#color-5 + label span {
     background-color: #e74c3c;
   }
+  
   .custom-radios input[type="radio"]:checked + label span {
     opacity: 1;
     background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg) center center no-repeat;
@@ -54,4 +58,10 @@ html, body {
     height: 40px;
     display: inline-block;
   
+  }
+
+  #questions{
+      font-size: 24px;
+      font-weight: 600;
+
   }
