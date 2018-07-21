@@ -5,10 +5,10 @@
   <title>Friend Finder Survey</title>
 
   <!-- Latest compiled and minified CSS & JS -->
-  <link rel="stylesheet" href="../assets/reset.css">
+  <link rel="stylesheet" href="reset.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="../assets/style.css">
+  <link rel="stylesheet" href="style.css">
 
   <script src="https://code.jquery.com/jquery.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
@@ -23,7 +23,8 @@
       <hr>
       <h3 class="text-center">Answer each question as honestly as you</h3>
       <h3 class="text-center">can so we can find a good friend match!</h3>
-      <br>
+      <br><br>
+      <h5 class="text-center">Red = Disagree Strongly   Blue= Agree Strongly</h5>     
 
     </div>
 
@@ -44,31 +45,57 @@
 
 
       <form id="questions" >
-        <div class="row">
-          <label class="radio-inline"><input type="radio"  name="radio" value = 1><span class="checkmark button1"></span></label>
-          <label class="radio-inline"><input type="radio"  name="radio" value = 2><span class="checkmark button2"></span></label>
-          <label class="radio-inline"><input type="radio"  name="radio" value = 3><span class="checkmark button3"></span></label>
-          <label class="radio-inline"><input type="radio"  name="radio" value = 4><span class="checkmark button4"></span></label>
-          <label class="radio-inline"><input type="radio"  name="radio" value = 5><span class="checkmark button5"></span></label>
-        </div>     
-<br>
-        <div class="row">
-            <label class="radio-inline"><input type="radio"  name="radio" value = 1><span class="checkmark button1"></span></label>
-            <label class="radio-inline"><input type="radio"  name="radio" value = 2><span class="checkmark button2"></span></label>
-            <label class="radio-inline"><input type="radio"  name="radio" value = 3><span class="checkmark button3"></span></label>
-            <label class="radio-inline"><input type="radio"  name="radio" value = 4><span class="checkmark button4"></span></label>
-            <label class="radio-inline"><input type="radio"  name="radio" value = 5><span class="checkmark button5"></span></label>
-          </div> 
         
-        
-
               
-      </form>
-
-      
-
+      </form>   
 
     </div>
+
+    <div>
+    <button type="submit" class="submit btn btn-primary">Submit</button>
+    </div>
+
+    <br><br>
+
+    <div id="failModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Missing Something?</h4>
+          </div>
+          <div class="modal-body">
+            <p>Please fill out both fields and answer all the questions.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+
+    <div id="successModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+    
+        
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Meet your match!</h4>
+          </div>
+          <div class="modal-body">
+            <p>Pleas</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+
+
 
 
     <footer class="footer">
@@ -76,13 +103,11 @@
         <p><a href="/api/friends">Friends</a> </p>
       </div>
     </footer>
-
   
 
 </body>
 </html>
 
-<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS SENT TO OUR SERVER -->
 <script type="text/javascript">
 
 var questionSet = [
@@ -98,45 +123,57 @@ var questionSet = [
         "Coding is more fun than frustrating"
 ]
 
-
-
  for(var i = 0; i<questionSet.length; i++){
 
-var q = i+1;
- $("#questions").append('<div class ="row"> Q'+ q + ' -- ' +questionSet[i] + '<br></div>'); 
- $("#questions").append('<div class ="row">');
+        var q = i+1;
+        $("#questions").append('<div class ="row"> Q'+ q + ' -- ' +questionSet[i] + '<br></div>'); 
+        
 
-for(var j =1; j<6; j++){
-  var button = '<label class="radio-inline"><input type="radio"  name="radio' + i + ' " value = ' + j + '><span class="checkmark button' + j +'"></span></label>'
-  $("#questions").append(button);
+        var button = '<div class ="row">';
 
-  if(j === 5){
-    $("#questions").append('</div>');  
-  }
+            for(var j =1; j<6; j++){
+              
+              button += '<label class="radio-inline"><input type="radio"  name="radio' + i + '" value = ' + j +
+              '><span class="checkmark button' + j +'"></span></label>';  
 
-}
+              if(j === 5){                
+                button += '</div><br><br>';  
+              }
+            }
 
-} 
+        $("#questions").append(button);
 
+        } 
 
-
-
-
-
-
-    // In this code below we create the Front-end JavaScript which "POSTS" our form data to our express server.
-    // In essence, when the user hits submit, jQuery grabs all of the fields then sends a post request to our api
-    // Our api recognizes the route (/api/tables)... and then runs the associated code (found in api-routes.js).
-    // In this case the associated code "saves" the data to the table-data.js file or waitinglist-data.js file
 
     $(".submit").on("click", function(event) {
       event.preventDefault();
 
-      // Here we grab the form elements
+      var surveyComplete = true;
+      var userScores = [];
+
+      for(var i = 0; i<questionSet.length; i++){
+
+        var radioInput = $('input[name=radio' + i + ']:checked').val();
+
+            if(radioInput === undefined){      
+              surveyComplete = false;
+              $("#failModal").modal('show');
+            }
+            userScores.push(radioInput); 
+          }    
+
+          if($.trim($("#name").val()) == "" || $.trim($("#pic").val()) == ""){
+                $("#failModal").modal('show');
+          }      
+
+
+      
+      if (surveyComplete && $.trim($("#name").val()) != "" && $.trim($("#pic").val()) != "" ){
       var newFriend = {
         name: $("#name").val().trim(),
-        picture: $("#pic").val().trim(),
-        scores: []
+        picture: $("#pic").val().trim(), 
+        scores: userScores
       };
 
       console.log(newFriend);
@@ -148,12 +185,17 @@ for(var j =1; j<6; j++){
 
       $.post("/api/friends", newFriend,
         function(data) {
+
+          
          
           $("#name").val("");
           $("#pic").val("");
 
         });
 
-    });
+
+        $("#successModal").modal('show');
+      } //end if
+    }); //end click function
 
 </script>
