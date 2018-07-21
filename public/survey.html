@@ -43,54 +43,30 @@
 
 
 
-      <div class="row" >
-          
-      <div class="custom-radios" id="questions">
-       <!--  <div>
-          <input type="radio" id="color-1" name="color" value= 1 >
-          <label for="color-1">
-            <span>
-            </span>
-          </label>
-        </div>
+      <form id="questions" >
+        <div class="row">
+          <label class="radio-inline"><input type="radio"  name="radio" value = 1><span class="checkmark button1"></span></label>
+          <label class="radio-inline"><input type="radio"  name="radio" value = 2><span class="checkmark button2"></span></label>
+          <label class="radio-inline"><input type="radio"  name="radio" value = 3><span class="checkmark button3"></span></label>
+          <label class="radio-inline"><input type="radio"  name="radio" value = 4><span class="checkmark button4"></span></label>
+          <label class="radio-inline"><input type="radio"  name="radio" value = 5><span class="checkmark button5"></span></label>
+        </div>     
+<br>
+        <div class="row">
+            <label class="radio-inline"><input type="radio"  name="radio" value = 1><span class="checkmark button1"></span></label>
+            <label class="radio-inline"><input type="radio"  name="radio" value = 2><span class="checkmark button2"></span></label>
+            <label class="radio-inline"><input type="radio"  name="radio" value = 3><span class="checkmark button3"></span></label>
+            <label class="radio-inline"><input type="radio"  name="radio" value = 4><span class="checkmark button4"></span></label>
+            <label class="radio-inline"><input type="radio"  name="radio" value = 5><span class="checkmark button5"></span></label>
+          </div> 
         
-        <div>
-          <input type="radio" id="color-2" name="color" value= 2 >
-          <label for="color-2">
-            <span>
-            </span>
-          </label>
-        </div>
         
-        <div>
-          <input type="radio" id="color-3" name="color" value= 3>
-          <label for="color-3">
-            <span>
-            </span>
-          </label>
-        </div>
+
+              
+      </form>
+
       
-        <div>
-          <input type="radio" id="color-4" name="color" value= 4>
-          <label for="color-4">
-            <span>
-            </span>
-          </label>
-        </div>
 
-        <div>
-            <input type="radio" id="color-5" name="color" value= 5>
-            <label for="color-5">
-              <span>
-              </span>
-            </label>
-          </div>
- -->
-
-
-      </div>
-        </div>
-      </div>
 
     </div>
 
@@ -124,21 +100,23 @@ var questionSet = [
 
 
 
-for(var i = 0; i<questionSet.length; i++){
+ for(var i = 0; i<questionSet.length; i++){
 
 var q = i+1;
-$("#questions").append('Q'+ q + ' -- ' +questionSet[i] + '<br>');
-
+ $("#questions").append('<div class ="row"> Q'+ q + ' -- ' +questionSet[i] + '<br></div>'); 
+ $("#questions").append('<div class ="row">');
 
 for(var j =1; j<6; j++){
-  var button = '<div><input type="radio" id="color-' + j + '" name="color" value= ' + j +'><label for="color-' + j + '"><span></span></label></div>'
+  var button = '<label class="radio-inline"><input type="radio"  name="radio' + i + ' " value = ' + j + '><span class="checkmark button' + j +'"></span></label>'
   $("#questions").append(button);
 
+  if(j === 5){
+    $("#questions").append('</div>');  
+  }
+
 }
 
-$("#questions").append('<br><br>');
-
-}
+} 
 
 
 

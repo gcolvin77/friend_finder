@@ -1,67 +1,91 @@
-html, body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-  }
-  
-  
-  .custom-radios div {
-    display: inline-block;
-  }
-  .custom-radios input[type="radio"] {
-    display: none;
-  }
-  .custom-radios input[type="radio"] + label {
-    color: #333;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-  }
-  .custom-radios input[type="radio"] + label span {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    margin: -1px 4px 0 0;
-    vertical-align: middle;
-    cursor: pointer;
-    border-radius: 50%;
-    border: 2px solid #FFFFFF;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.33);
-    background-repeat: no-repeat;
-    background-position: center;
-    text-align: center;
-    line-height: 44px;
-  }
-  .custom-radios input[type="radio"] + label span img {
-    opacity: 0;
-    transition: all .3s ease;
-  }
-  .custom-radios input[type="radio"]#color-1 + label span {
-    background-color: #2ecc71;
-  }
-  .custom-radios input[type="radio"]#color-2 + label span {
-    background-color: #3498db;
-  }
-  .custom-radios input[type="radio"]#color-3 + label span {
-    background-color: #f1c40f;
-  }
-  .custom-radios input[type="radio"]#color-4 + label span {
-    background-color: orange;
-  }
-  .custom-radios input[type="radio"]#color-5 + label span {
-    background-color: #e74c3c;
-  }
-  
-  .custom-radios input[type="radio"]:checked + label span {
-    opacity: 1;
-    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/242518/check-icn.svg) center center no-repeat;
-    width: 40px;
-    height: 40px;
-    display: inline-block;
-  
-  }
 
   #questions{
       font-size: 24px;
       font-weight: 600;
 
   }
+
+  .radio-inline {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+}
+
+/* Hide the browser's default radio button */
+.radio-inline input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.button1 {  
+  background-color: red;  
+}
+
+.button2 {  
+  background-color: orange;  
+}
+
+.button3 {  
+  background-color: yellow;  
+}
+
+.button4 {  
+  background-color: green;  
+}
+
+.button5 {  
+  background-color: blue;  
+}
+
+/* On mouse-over, add a grey background color */
+.radio-inline:hover input ~ .checkmark {
+    opacity: .3;
+}
+
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.radio-inline input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.radio-inline .checkmark:after {
+ 	top: 7px;
+	left: 7px;
+	width: 19px;
+	height: 19px;
+	border-radius: 50%;
+  background: white;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
