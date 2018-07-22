@@ -19,34 +19,49 @@
   <div class="container">
 
     <div class="jumbotron">
-      <h1 class="text-center"><span class="fa"></span>Take the survey to meet your match!</h1>
+      <h2 class="text-center"><span class="fa"></span>Take the survey to meet your match!</h2>
       <hr>
-      <h3 class="text-center">Answer each question as honestly as you</h3>
-      <h3 class="text-center">can so we can find a good friend match!</h3>
+      <h4 class="text-center">Answer each question as honestly as you</h4>
+      <h4 class="text-center">can so we can find a good friend match!</h4>
       <br><br>
-      <h5 class="text-center">Red = Disagree Strongly   Blue= Agree Strongly</h5>     
+      <div class = "row">
+      <div class="col-sm">
+        <h6 class="text-center" id="word1">Disagree Strongly</h6> 
+      </div>
+      <div class="col-sm">
+        <h6 class="text-center" id="word2">Disagree </h6> 
+      </div>
+      <div class="col-sm">
+        <h6 class="text-center" id="word3">Meh</h6> 
+      </div>
+      <div class="col-sm">
+        <h6 class="text-center" id="word4">Agree </h6> 
+      </div>
+      <div class="col-sm">
+        <h6 class="text-center" id="word5">Agree Strongly</h6> 
+      </div>
+
+    </div>
+          
 
     </div>
 
     <div class="container">
-        <div class="row">
-            <form>
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" class="form-control" id="name" placeholder="John Doe">
-                </div>
-                <div class="form-group">
-                  <label for="pic">Link to Picture</label>
-                  <input type="text" class="form-control" id="pic" placeholder="www.google.com">
-                </div>
-              </form>
-        </div>
+        <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label for="pic">Link to Picture</label>
+              <input type="text" class="form-control" id="pic" placeholder="www.google.com">
+            </div>
+          </form>
+      </div>
 
-
-
-      <form id="questions" >
+    <div class="container">            
         
-              
+      <form id="questions" >           
       </form>   
 
     </div>
@@ -83,9 +98,10 @@
         <div class="modal-content">
           <div class="modal-header">
             <h4 class="modal-title">Meet your match!</h4>
+            <h4 id="matchName"></h4>
           </div>
-          <div class="modal-body">
-            <p>Pleas</p>
+          <div class="modal-body text-center" id="matchPic">
+            
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -94,8 +110,6 @@
     
       </div>
     </div>
-
-
 
 
     <footer class="footer">
@@ -145,7 +159,6 @@ var questionSet = [
 
         } 
 
-
     $(".submit").on("click", function(event) {
       event.preventDefault();
 
@@ -176,18 +189,13 @@ var questionSet = [
         scores: userScores
       };
 
-      console.log(newFriend);
-
-      // This line is the magic. It"s very similar to the standard ajax function we used.
-      // Essentially we give it a URL, we give it the object we want to send, then we have a "callback".
-      // The callback is the response of the server. In our case, we set up code in api-routes that "returns" true or false
-      // depending on if a tables is available or not.
+    
 
       $.post("/api/friends", newFriend,
         function(data) {
 
-          
-         
+          $("#matchName").text(data.name);
+          $("#matchPic").html('<img src="' + data.photo + '" alt="Match" height="250">');
           $("#name").val("");
           $("#pic").val("");
 

@@ -41,7 +41,6 @@
 
 .button1 {  
   background-color: red; 
-   
 }
 
 .button2 {  
@@ -49,16 +48,48 @@
 }
 
 .button3 {  
-  background-color: yellow;  
+  background-color: yellow; 
 }
 
 .button4 {  
-  background-color: green;  
+  background-color: green; 
 }
 
 .button5 {  
-  background-color: blue;  
+  background-color: blue; 
 }
+
+#word1 {    
+  color: red;
+  
+}
+
+#word2 {  
+ 
+  color: orange;
+}
+
+#word3 {  
+  
+  color:  yellow;
+}
+
+#word4 {  
+  
+  color: green;
+}
+
+#word5 {  
+ 
+  color: blue;
+}
+
+
+
+
+
+
+
 
 /* On mouse-over, add a grey background color */
 .radio-inline:hover input ~ .checkmark {
